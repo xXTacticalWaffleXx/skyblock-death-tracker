@@ -35,12 +35,12 @@ std::string players_uuid;
 std::string webhook_url;
 std::string api_key;
 int run_frequency = 3600; //how often you want the program to send a message in seconds default = 3600 (one hour) (remember to change the message sent to reflect this varible)
+bool sendmessages = true;
 
 int last_run = 0;
 
 void send_message()
 {
-
 	// set up varibles
 	std::string api_json;
 	std::string url = "https://api.hypixel.net/skyblock/profiles?key=" + api_key +"&uuid=" + players_uuid;
@@ -49,6 +49,8 @@ void send_message()
 	curlpp::options::WriteStream ws(&ss);
 	Json::Value root;
 	Json::Reader reader;
+
+	std::cout << url;
 
 	// get the json data from the hypixel server
 	request.setOpt(new curlpp::options::Url(url));
@@ -60,7 +62,6 @@ void send_message()
 	// parse the json data and find and print the deaths varible
 	reader.parse(api_json, root);
 	std::string current_deathcount_string = root["profiles"][2]["members"][players_uuid]["stats"]["deaths"].asString();
-
 	// calculates how many deaths the player has had since there last death and stores an updated death count
 	int current_deathcount = stoi(current_deathcount_string);
 	std::ifstream data_in("data.txt");
@@ -76,33 +77,34 @@ void send_message()
 	std::ofstream os("data.txt");
 	os << current_deathcount;
 	os.close();
-	std::cout << message;
 
 	//sends the message string to a discord webhook
 	DiscordWebhook webhook(webhook_url.c_str());
 	webhook.send_message(message.c_str());
+	std::cout << "sent message: " << message << std::endl;
 }
 
 int main() {
-	
+
 	//import settings from config file
 	std::ifstream in("config.txt");
 	if (!in) {
-		std::cout << "config.txt does not exist, obtain a template at [ADD URL HERE]";
-		return 0;
-	}
-	std::string str;
+		std::cout << "config file doesnt exist";
+	} 
 	// Read the next line from File until it reaches the end.
 	std::vector <std::string> settings;
+	std::string str;
 	while (getline(in, str)) {
-		settings.push_back(str);
+		// Line contains string of length > 0 then save it in vector
+		if (str.size() > 0)
+			settings.push_back(str);
 	}
-	in.close();
+	in.close(); 
 
-	players_uuid = settings.at(1);
-	webhook_url = settings.at(2);
-	api_key = settings.at(3);
-	player_name = settings.at(4);
+	players_uuid	= settings.at(0);
+	webhook_url		= settings.at(1);
+	api_key			= settings.at(2);
+	player_name		= settings.at(3);
 	
 	while (true) {
 		time_t now = time(0);
