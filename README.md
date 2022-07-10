@@ -41,5 +41,7 @@ host it
 if you build this repo on plain msvc or gcc please make a pull request with those instructions
 
 feel free to contact me on
+
 discord: tactical waffle#1560
+
 email: tactical-waffle@outlook.com
