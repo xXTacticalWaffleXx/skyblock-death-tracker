@@ -1,5 +1,5 @@
-title: skyblock death tracker
----
+# skyblock death tracker
+
 
 this program is meant to track a players deaths in hypixel skyblock using a discord webhook
 
@@ -13,7 +13,6 @@ C: hosting counts as distribution, meaning if you make a modified version say on
 there are more things but those are the most important
 
 ## usage instruction
----
 get a binary in its own folder
 
 next to that binary make a config.txt file (an example can be found in the root of this repo)
@@ -21,7 +20,6 @@ next to that binary make a config.txt file (an example can be found in the root 
 run the binary
 
 ## build instructions
----
 download vs 2019
 
 get vcpkg at vcpkg.io (when installing remember to use the no telemetry option)
