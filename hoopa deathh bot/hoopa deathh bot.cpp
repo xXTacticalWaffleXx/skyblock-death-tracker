@@ -30,16 +30,17 @@ along with this program.If not, see < https://www.gnu.org/licenses/>.
 #include "discord_webhook.h"
 
 //config varibles
-std::string player_name = "ohoopa";
-std::string players_uuid = "cdae37235d294582bce572a570c19345";
-std::string webhook_url = "";
-std::string api_key = "";
+std::string player_name;
+std::string players_uuid;
+std::string webhook_url;
+std::string api_key;
 int run_frequency = 3600; //how often you want the program to send a message in seconds default = 3600 (one hour) (remember to change the message sent to reflect this varible)
 
 int last_run = 0;
 
 void send_message()
 {
+
 	// set up varibles
 	std::string api_json;
 	std::string url = "https://api.hypixel.net/skyblock/profiles?key=" + api_key +"&uuid=" + players_uuid;
@@ -83,6 +84,26 @@ void send_message()
 }
 
 int main() {
+	
+	//import settings from config file
+	std::ifstream in("config.txt");
+	if (!in) {
+		std::cout << "config.txt does not exist, obtain a template at [ADD URL HERE]";
+		return 0;
+	}
+	std::string str;
+	// Read the next line from File until it reaches the end.
+	std::vector <std::string> settings;
+	while (getline(in, str)) {
+		settings.push_back(str);
+	}
+	in.close();
+
+	players_uuid = settings.at(1);
+	webhook_url = settings.at(2);
+	api_key = settings.at(3);
+	player_name = settings.at(4);
+	
 	while (true) {
 		time_t now = time(0);
 		if (now > last_run + run_frequency) {
