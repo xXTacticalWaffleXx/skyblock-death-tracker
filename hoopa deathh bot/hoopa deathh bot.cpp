@@ -89,7 +89,7 @@ int main() {
 	//import settings from config file
 	std::ifstream in("config.txt");
 	if (!in) {
-		std::cout << "config file doesnt exist, you can find a template at https://github.com/xXTacticalWaffleXx/skyblock-death-tracker/blob/main/config_template" << std::endl;
+		std::cout << "config file doesnt exist, you can find a template at https://raw.githubusercontent.com/xXTacticalWaffleXx/skyblock-death-tracker/main/config_template" << std::endl;
 		return 0;
 	} 
 	// Read the next line from File until it reaches the end.
@@ -107,10 +107,10 @@ int main() {
 	api_key			= settings.at(2);
 	player_name		= settings.at(3);
 
-	if (players_uuid == "") { std::cout << "your config.txt does not have a uuid, please put the uuid of the player whos deaths you want to track on line 1"; }
-	if (webhook_url == "")  { std::cout << "your config.txt does not have a webhook url, please put a webhook url of the channel where you want this channel to send the messages on line 2"; }
-	if (api_key == "")		{ std::cout << "your config.txt does not have an api key, please put a valid hypixel api key on line 3"; }
-	if (player_name == "")  { std::cout << "your config.txt does not have a player name, please put the name of the player whos deaths you want to track on line 4"; }
+	if (players_uuid == "") { std::cout << "your config.txt does not have a uuid, please put the uuid of the player whos deaths you want to track on line 1"; return 0; }
+	if (webhook_url == "")  { std::cout << "your config.txt does not have a webhook url, please put a webhook url of the channel where you want this channel to send the messages on line 2"; return 0;}
+	if (api_key == "")		{ std::cout << "your config.txt does not have an api key, please put a valid hypixel api key on line 3"; return 0;}
+	if (player_name == "")  { std::cout << "your config.txt does not have a player name, please put the name of the player whos deaths you want to track on line 4"; return 0;}
 	
 	while (true) {
 		time_t now = time(0);
