@@ -66,7 +66,7 @@ void send_message()
 	int current_deathcount = stoi(current_deathcount_string);
 	std::ifstream data_in("data.txt");
 	if (!data_in) {
-		std::cout << "shits buggered cunt";
+		std::cout << "data.txt does not exist, creating" << std::endl;
 	}
 	int old_deathcount;
 	data_in >> old_deathcount;
