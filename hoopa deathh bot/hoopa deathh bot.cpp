@@ -36,6 +36,9 @@ std::string webhook_url;
 std::string api_key;
 int run_frequency = 3600; //how often you want the program to send a message in seconds default = 3600 (one hour) (remember to change the message sent to reflect this varible)
 bool sendmessages = true;
+bool pingrole;
+std::string roleid;
+int pingMin;
 
 int last_run = 0;
 
@@ -75,6 +78,9 @@ void send_message()
 	std::string message;
 	message = player_name + " has died " + deaths_since_last_run_str + " times in the last hour " + "total death count: " + current_deathcount_string;
 	std::ofstream os("data.txt");
+	if (pingrole || deaths_since_last_run > pingMin) {
+		message = message + " <@&" + roleid + ">";
+	}
 	os << current_deathcount;
 	os.close();
 
@@ -106,6 +112,17 @@ int main() {
 	webhook_url		= settings.at(1);
 	api_key			= settings.at(2);
 	player_name		= settings.at(3);
+	if (settings.at(4)!= "") {
+		roleid = (settings.at(4));
+		pingrole = true;
+		if (settings.at(5) != "") {
+			pingMin = stoi(settings.at(5));
+		}
+		else {
+			std::cout << "you need to add a minimum death count for pings to your config.txt\n";
+			return 0;
+		}
+	}
 
 	if (players_uuid == "") { std::cout << "your config.txt does not have a uuid, please put the uuid of the player whos deaths you want to track on line 1"; return 0; }
 	if (webhook_url == "")  { std::cout << "your config.txt does not have a webhook url, please put a webhook url of the channel where you want this channel to send the messages on line 2"; return 0;}

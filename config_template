@@ -2,5 +2,7 @@ uuid
 discord webhook url
 hypixel api key
 players ign
+role id (optional, if this line is present the program will ping a role if the death count since the last execution exceeds the set ammount in line 6)
+minimum deaths for ping (the code will ping the role mentioned above if the player has died more this ammount of times)
 
 makesure that you only have the relevent text in the file (remove this line and the text saying what to put where)
