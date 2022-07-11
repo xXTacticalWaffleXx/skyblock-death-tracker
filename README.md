@@ -19,7 +19,7 @@ next to that binary make a config.txt file (an example can be found in the root 
 
 run the binary
 
-## build instructions
+## build instructions windows (vs 2019)
 download vs 2019
 
 get vcpkg at vcpkg.io (when installing remember to use the no telemetry option)
@@ -36,9 +36,17 @@ press the compile button
 
 find ur exe
 
-host it
+## build instructions on gcc
 
-if you build this repo on plain msvc or gcc please make a pull request with those instructions
+install the libraries needed with your distros package manager
+
+in this case libcurl jsoncpp and curlpp
+
+navigate to [root of git repo]/hoopa deathh bot/
+
+run g++ hoopa deathh bot.cpp discord_webhook.cc -lcurl -lcurlpp -ljsoncpp
+
+if you build this repo on plain msvc please make a pull request with those instructions
 
 feel free to contact me on
 
