@@ -78,7 +78,7 @@ void send_message()
 	std::string message;
 	message = player_name + " has died " + deaths_since_last_run_str + " times in the last hour " + "total death count: " + current_deathcount_string;
 	std::ofstream os("data.txt");
-	if (pingrole || deaths_since_last_run > pingMin) {
+	if (pingrole && deaths_since_last_run > pingMin) {
 		message = message + " <@&" + roleid + ">";
 	}
 	os << current_deathcount;
@@ -112,6 +112,9 @@ int main() {
 	webhook_url		= settings.at(1);
 	api_key			= settings.at(2);
 	player_name		= settings.at(3);
+	if (settings.at(4) == "" && settings.at(5) != "") {
+		std::cout << "you need to add a role id to your config.txt\n";
+	}
 	if (settings.at(4)!= "") {
 		roleid = (settings.at(4));
 		pingrole = true;
