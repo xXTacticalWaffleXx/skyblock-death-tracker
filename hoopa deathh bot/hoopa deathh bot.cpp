@@ -95,8 +95,20 @@ int main() {
 	//import settings from config file
 	std::ifstream in("config.txt");
 	if (!in) {
-		std::cout << "config file doesnt exist, you can find a template at https://raw.githubusercontent.com/xXTacticalWaffleXx/skyblock-death-tracker/main/config_template" << std::endl;
-		return 0;
+		std::ofstream os("config.txt");
+		os << "uuid" << std::endl
+			<< "discord webhook url" << std::endl
+			<< "hypixel api key" << std::endl
+			<< "players ign" << std::endl
+			<< "role id (optional, if this line is present the program will ping a role if the death count since the last execution exceeds the set ammount in line 6)" << std::endl
+			<< "minimum deaths for ping (the code will ping the role mentioned above if the player has died more this ammount of times)" << std::endl
+			<< std::endl
+			<< "makesure that you only have the relevent text in the file (remove this line and the text saying what to put where)";
+
+		std::cout << "config.txt doesnt exist, creating and exiting, please be sure to edit it with actual information";
+
+		os.close();
+		return 1;
 	} 
 	// Read the next line from File until it reaches the end.
 	std::vector <std::string> settings;
@@ -114,6 +126,7 @@ int main() {
 	player_name		= settings.at(3);
 	if (settings.at(4) == "" && settings.at(5) != "") {
 		std::cout << "you need to add a role id to your config.txt\n";
+		return 1;
 	}
 	if (settings.at(4)!= "") {
 		roleid = (settings.at(4));
@@ -123,7 +136,7 @@ int main() {
 		}
 		else {
 			std::cout << "you need to add a minimum death count for pings to your config.txt\n";
-			return 0;
+			return 1;
 		}
 	}
 
