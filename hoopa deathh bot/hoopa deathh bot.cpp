@@ -30,6 +30,7 @@ along with this program.If not, see < https://www.gnu.org/licenses/>.
 #include "discord_webhook.h"
 
 //config varibles
+//todo move the run_frequency var to the config.txt
 std::string player_name;
 std::string players_uuid;
 std::string webhook_url;
@@ -39,6 +40,7 @@ bool sendmessages = true;
 bool pingrole;
 std::string roleid;
 int pingMin;
+bool debug = false;
 
 int last_run = 0;
 
@@ -66,6 +68,9 @@ void send_message()
 	reader.parse(api_json, root);
 	std::string current_deathcount_string = root["profiles"][2]["members"][players_uuid]["stats"]["deaths"].asString();
 	// calculates how many deaths the player has had since there last death and stores an updated death count
+	if (debug) {
+		std::cout << current_deathcount_string;
+	}
 	int current_deathcount = stoi(current_deathcount_string);
 	std::ifstream data_in("data.txt");
 	if (!data_in) {
@@ -102,6 +107,7 @@ int main() {
 			<< "players ign" << std::endl
 			<< "role id (optional, if this line is present the program will ping a role if the death count since the last execution exceeds the set ammount in line 6)" << std::endl
 			<< "minimum deaths for ping (the code will ping the role mentioned above if the player has died more this ammount of times)" << std::endl
+			<< "if you want debug code to be on or off type true on this line (type nothing for debug code off)" << std::endl
 			<< std::endl
 			<< "makesure that you only have the relevent text in the file (remove this line and the text saying what to put where)";
 
@@ -124,6 +130,13 @@ int main() {
 	webhook_url		= settings.at(1);
 	api_key			= settings.at(2);
 	player_name		= settings.at(3);
+
+	//setting the debug var before everything else because i need to reference it in the code below
+	
+	if (settings.at(6) == "true") {
+		debug = true;
+	}
+
 	if (settings.at(4) == "" && settings.at(5) != "") {
 		std::cout << "you need to add a role id to your config.txt\n";
 		return 1;
@@ -132,6 +145,9 @@ int main() {
 		roleid = (settings.at(4));
 		pingrole = true;
 		if (settings.at(5) != "") {
+			if (debug) {
+				std::cout << settings.at(5) << std::endl;
+			}
 			pingMin = stoi(settings.at(5));
 		}
 		else {
