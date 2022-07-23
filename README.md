@@ -36,7 +36,7 @@ press the compile button
 
 find ur exe
 
-## build instructions on gcc
+## build instructions on unix
 
 install the libraries needed with your distros package manager
 
@@ -44,7 +44,9 @@ in this case libcurl jsoncpp and curlpp
 
 navigate to [root of git repo]/hoopa deathh bot/
 
-run g++ hoopa deathh bot.cpp discord_webhook.cc -lcurl -lcurlpp -ljsoncpp
+run g++ -02 hoopa deathh bot.cpp discord_webhook.cc -lcurl -lcurlpp -ljsoncpp
+
+if building fails because it cant access json/json.h try editing line 24 of hoopa deathh bot.cpp to say jsoncpp/json/json.h instead of json/json.h
 
 if you build this repo on plain msvc please make a pull request with those instructions
 
