@@ -140,6 +140,7 @@ int main() {
 	
 	if (settings.size() > 6) {
 		std::cout << "you need to set the debug toggle (line 6) in your config.txt" << std::endl;
+		return 0;
 	}
 	else if (settings.at(6) == "false") {
 		debug = false;
