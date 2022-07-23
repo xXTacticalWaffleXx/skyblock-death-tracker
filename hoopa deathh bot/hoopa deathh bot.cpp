@@ -42,6 +42,7 @@ std::string roleid;
 int pingMin;
 bool debug = false;
 bool printedUrl = false;
+std::string humanReadableFreq;
 
 int last_run = 0;
 
@@ -85,7 +86,7 @@ void send_message()
 	int deaths_since_last_run = current_deathcount - old_deathcount;
 	std::string deaths_since_last_run_str = std::to_string(deaths_since_last_run);
 	std::string message;
-	message = player_name + " has died " + deaths_since_last_run_str + " times in the last hour " + "total death count: " + current_deathcount_string;
+	message = player_name + " has died " + deaths_since_last_run_str + " times in the last " + humanReadableFreq + " total death count: " + current_deathcount_string;
 	std::ofstream os("data.txt");
 	if (pingrole && deaths_since_last_run > pingMin) {
 		message = message + " <@&" + roleid + ">";
@@ -112,6 +113,8 @@ int main() {
 			<< "role id (optional, if this line is present the program will ping a role if the death count since the last execution exceeds the set ammount in line 6)" << std::endl
 			<< "minimum deaths for ping (the code will ping the role mentioned above if the player has died more this ammount of times)" << std::endl
 			<< "debug code toggle (true/false)" << std::endl
+			<< "time between api polls in seconds default is one hour (3600 seconds)" << std::endl
+			<< "human readable time between polls (i.e. hour, 1 month, 2 days)" << std::endl
 			<< std::endl
 			<< "makesure that you only have the relevent text in the file (remove this line and the text saying what to put where)";
 
