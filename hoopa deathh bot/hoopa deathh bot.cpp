@@ -73,7 +73,7 @@ void send_message()
 	std::string current_deathcount_string = root["profiles"][2]["members"][players_uuid]["stats"]["deaths"].asString();
 	// calculates how many deaths the player has had since there last death and stores an updated death count
 	if (debug) {
-		std::cout << current_deathcount_string;
+		std::cout << "stoi str: " << current_deathcount_string << std::endl;
 	}
 	int current_deathcount = stoi(current_deathcount_string);
 	std::ifstream data_in("data.txt");
@@ -158,7 +158,7 @@ int main() {
 		pingrole = true;
 		if (settings.at(5) != "") {
 			if (debug) {
-				std::cout << settings.at(5) << std::endl;
+				std::cout << "stoi str: " << settings.at(5) << std::endl;
 			}
 			pingMin = stoi(settings.at(5));
 		}
