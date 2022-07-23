@@ -41,6 +41,7 @@ bool pingrole;
 std::string roleid;
 int pingMin;
 bool debug = false;
+bool printedUrl = false;
 
 int last_run = 0;
 
@@ -55,7 +56,10 @@ void send_message()
 	Json::Value root;
 	Json::Reader reader;
 
-	std::cout << url;
+	if (debug & printedUrl) {
+		std::cout << "webhook url" << url << std::endl;;
+		printedUrl = true;
+	}
 
 	// get the json data from the hypixel server
 	request.setOpt(new curlpp::options::Url(url));
