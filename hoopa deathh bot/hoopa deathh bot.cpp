@@ -111,7 +111,7 @@ int main() {
 			<< "players ign" << std::endl
 			<< "role id (optional, if this line is present the program will ping a role if the death count since the last execution exceeds the set ammount in line 6)" << std::endl
 			<< "minimum deaths for ping (the code will ping the role mentioned above if the player has died more this ammount of times)" << std::endl
-			<< "if you want debug code to be on or off type true on this line (type nothing for debug code off)" << std::endl
+			<< "if you want debug code to be on or off type something on this line (type nothing for debug code off)" << std::endl
 			<< std::endl
 			<< "makesure that you only have the relevent text in the file (remove this line and the text saying what to put where)";
 
@@ -137,7 +137,7 @@ int main() {
 
 	//setting the debug var before everything else because i need to reference it in the code below
 	
-	if (settings.at(6) == "true") {
+	if (settings.at(6) != "") {
 		debug = true;
 	}
 
