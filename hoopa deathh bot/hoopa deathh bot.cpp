@@ -138,7 +138,7 @@ int main() {
 	//setting the debug var before everything else because i need to reference it in the code below
 	
 	
-	if (settings.size() > 6) {
+	if (settings.size() < 7) {
 		std::cout << "you need to set the debug toggle (line 6) in your config.txt" << std::endl;
 		return 0;
 	}
