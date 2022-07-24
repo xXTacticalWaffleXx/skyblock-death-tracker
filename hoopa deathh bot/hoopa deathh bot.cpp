@@ -43,6 +43,7 @@ int pingMin;
 bool debug = false;
 bool printedUrl = false;
 std::string humanReadableFreq;
+int profileNum;
 
 int last_run = 0;
 
@@ -71,7 +72,7 @@ void send_message()
 
 	// parse the json data and find and print the deaths varible
 	reader.parse(api_json, root);
-	std::string current_deathcount_string = root["profiles"][2]["members"][players_uuid]["stats"]["deaths"].asString();
+	std::string current_deathcount_string = root["profiles"][profileNum]["members"][players_uuid]["stats"]["deaths"].asString();
 	// calculates how many deaths the player has had since there last death and stores an updated death count
 	if (debug) {
 		std::cout << "stoi str: " << current_deathcount_string << std::endl;
@@ -115,6 +116,7 @@ int main() {
 			<< "debug code toggle (true/false)" << std::endl
 			<< "time between api polls in seconds default is one hour (3600 seconds)" << std::endl
 			<< "human readable time between polls (i.e. hour, 1 month, 2 days)" << std::endl
+			<< "number of the profile you want to check, to find this number poll the api in a browser and look at the response (more indepth instructions comming soon)"
 			<< std::endl
 			<< "makesure that you only have the relevent text in the file (remove this line and the text saying what to put where)";
 
@@ -133,19 +135,18 @@ int main() {
 	}
 	in.close(); 
 
+	if (settings.size() < 8) {
+		std::cout << "you need to set every line in your config.txt" << std::endl;
+		return 0;
+	}
+
 	players_uuid	= settings.at(0);
 	webhook_url		= settings.at(1);
 	api_key			= settings.at(2);
 	player_name		= settings.at(3);
 
 	//setting the debug var before everything else because i need to reference it in the code below
-	
-	
-	if (settings.size() < 7) {
-		std::cout << "you need to set the debug toggle (line 6) in your config.txt" << std::endl;
-		return 0;
-	}
-	else if (settings.at(6) == "false") {
+	if (settings.at(6) == "false") {
 		debug = false;
 	}
 	else if (settings.at(6) == "true") {
@@ -170,6 +171,12 @@ int main() {
 			return 1;
 		}
 	}
+
+	if (debug) {
+		std::cout << "stoi str: " << settings.at(7) << std::endl;
+	}
+	profileNum = stoi(settings.at(7));
+	
 
 	if (players_uuid == "") { std::cout << "your config.txt does not have a uuid, please put the uuid of the player whos deaths you want to track on line 1"; return 0; }
 	if (webhook_url == "")  { std::cout << "your config.txt does not have a webhook url, please put a webhook url of the channel where you want this channel to send the messages on line 2"; return 0;}
