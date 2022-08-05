@@ -44,10 +44,18 @@ bool debug = false;
 bool printedUrl = false;
 std::string humanReadableFreq;
 int profileNum;
+std::string admin_id;
 
 int last_run = 0;
 
-void send_message()
+void send_message(std::string message, bool exit){
+		DiscordWebhook webhook(webhook_url.c_str());
+		webhook.send_message(message.c_str());
+		std::cout << "sent message: " << message << std::endl;
+}
+
+
+void generate_message()
 {
 	// set up varibles
 	std::string api_json;
@@ -77,7 +85,14 @@ void send_message()
 	if (debug) {
 		std::cout << "stoi str: " << current_deathcount_string << std::endl;
 	}
-	int current_deathcount = stoi(current_deathcount_string);
+	int current_deathcount;
+	try {
+		current_deathcount = stoi(current_deathcount_string);
+	}
+	catch (const std::invalid_argument& ia){
+		std::string error_message = "std::invalid_argument detected, shutting down " + admin_id;
+		send_message(error_message, true);
+	}
 	std::ifstream data_in("data.txt");
 	if (!data_in) {
 		std::cout << "data.txt does not exist, creating" << std::endl;
@@ -97,9 +112,10 @@ void send_message()
 
 	//sends the message string to a discord webhook
 	if (deaths_since_last_run > 0){
-		DiscordWebhook webhook(webhook_url.c_str());
-		webhook.send_message(message.c_str());
-		std::cout << "sent message: " << message << std::endl;
+	//	DiscordWebhook webhook(webhook_url.c_str());
+	//	webhook.send_message(message.c_str());
+	//	std::cout << "sent message: " << message << std::endl;
+	send_message(message, false);
 	} else{
 		std::cout << "player has not died in the last hour, not sending a message" << std::endl;
 	}
@@ -139,7 +155,7 @@ int main() {
 	}
 	in.close(); 
 
-	if (settings.size() < 8) {
+	if (settings.size() < 9) {
 		std::cout << "you need to set every line in your config.txt" << std::endl;
 		return 0;
 	}
@@ -168,7 +184,13 @@ int main() {
 			if (debug) {
 				std::cout << "stoi str: " << settings.at(5) << std::endl;
 			}
+			try{
 			pingMin = stoi(settings.at(5));
+			}
+			catch (const std::invalid_argument& ia){
+			std::string error_message = "std::invalid_argument detected, shutting down " + admin_id;
+			send_message(error_message, true);
+			}
 		}
 		else {
 			std::cout << "you need to add a minimum death count for pings to your config.txt\n";
@@ -176,11 +198,19 @@ int main() {
 		}
 	}
 
+
 	if (debug) {
 		std::cout << "stoi str: " << settings.at(7) << std::endl;
 	}
-	profileNum = stoi(settings.at(7));
-	
+	try{
+		profileNum = stoi(settings.at(7));
+	}
+	catch (const std::invalid_argument& ia){
+		std::string error_message = "std::invalid_argument detected, shutting down " + admin_id;
+		send_message(error_message, true);
+	}
+
+	admin_id = settings.at(8);
 
 	if (players_uuid == "") { std::cout << "your config.txt does not have a uuid, please put the uuid of the player whos deaths you want to track on line 1"; return 0; }
 	if (webhook_url == "")  { std::cout << "your config.txt does not have a webhook url, please put a webhook url of the channel where you want this channel to send the messages on line 2"; return 0;}
@@ -190,7 +220,7 @@ int main() {
 	while (true) {
 		time_t now = time(0);
 		if (now > last_run + run_frequency) {
-			send_message();
+			generate_message();
 			last_run = now;
 		}
 	}
