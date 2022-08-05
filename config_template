@@ -4,5 +4,7 @@ hypixel api key
 players ign
 role id (optional, if this line is present the program will ping a role if the death count since the last execution exceeds the set ammount in line 6)
 minimum deaths for ping (the code will ping the role mentioned above if the player has died more this ammount of times)
-
+debug code toggle (true/false)
+human readable time between polls (i.e. hour, 1 month, 2 days)
+number of the profile you want to check, to find this number poll the api in a browser and look at the response (more indepth instructions comming soon)
 makesure that you only have the relevent text in the file (remove this line and the text saying what to put where)
