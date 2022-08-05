@@ -52,6 +52,9 @@ void send_message(std::string message, bool exit){
 		DiscordWebhook webhook(webhook_url.c_str());
 		webhook.send_message(message.c_str());
 		std::cout << "sent message: " << message << std::endl;
+		if (exit){
+			return 0;
+		}
 }
 
 void generate_message()
@@ -86,7 +89,7 @@ void generate_message()
 	}
 	int current_deathcount;
 	try {
-		current_deathcount = stoi(current_deathcount_string);
+		current_deathcount = std::stoi(current_deathcount_string);
 	}
 	catch (const std::invalid_argument& ia){
 		std::string error_message = "std::invalid_argument detected, shutting down " + admin_id;
