@@ -54,7 +54,6 @@ void send_message(std::string message, bool exit){
 		std::cout << "sent message: " << message << std::endl;
 }
 
-
 void generate_message()
 {
 	// set up varibles
@@ -122,7 +121,7 @@ void generate_message()
 }
 
 int main() {
-
+	check_update();
 	//import settings from config file
 	std::ifstream in("config.txt");
 	if (!in) {
