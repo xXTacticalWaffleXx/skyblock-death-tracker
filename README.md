@@ -44,8 +44,6 @@ install the libraries needed with your distros package manager
 
 in this case libcurl jsoncpp and curlpp
 
-navigate to [root of git repo]/hoopa deathh bot/
-
 run g++ -02 hoopa deathh bot.cpp discord_webhook.cc -lcurl -lcurlpp -ljsoncpp
 
 if building fails because it cant access json/json.h try editing line 24 of hoopa deathh bot.cpp to say jsoncpp/json/json.h instead of json/json.h
