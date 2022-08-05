@@ -27,6 +27,7 @@ along with this program.If not, see < https://www.gnu.org/licenses/>.
 #include <fstream>
 #include <iostream>
 #include <ctime>
+#include <stdlib.h>
 #include "discord_webhook.h"
 
 //config varibles
@@ -53,7 +54,7 @@ void send_message(std::string message, bool exit){
 		webhook.send_message(message.c_str());
 		std::cout << "sent message: " << message << std::endl;
 		if (exit){
-			return 0;
+			std::exit(0);
 		}
 }
 
