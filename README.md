@@ -28,7 +28,9 @@ run vcpkg intergrate install to link installed libraries with vs 2019 automatica
 
 using vcpkg install libcurl, curlpp and jsoncpp
 
-open the sln file in the root of this repo with vs 2019
+create a new project for a command line c++ app (feel free to call it whatever you want)
+
+create two more files discord_webhook.cc and discord_webhook.h, copy the contents of each of these files into the files in the vs 2019 project (copy the contents of main.cpp into the cpp file with the same name as your project)
 
 change compilation mode to release
 
