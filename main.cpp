@@ -96,9 +96,13 @@ void send_message()
 	os.close();
 
 	//sends the message string to a discord webhook
-	DiscordWebhook webhook(webhook_url.c_str());
-	webhook.send_message(message.c_str());
-	std::cout << "sent message: " << message << std::endl;
+	if (deaths_since_last_run > 0){
+		DiscordWebhook webhook(webhook_url.c_str());
+		webhook.send_message(message.c_str());
+		std::cout << "sent message: " << message << std::endl;
+	} else{
+		std::cout << "player has not died in the last hour, not sending a message" << std::endl;
+	}
 }
 
 int main() {
