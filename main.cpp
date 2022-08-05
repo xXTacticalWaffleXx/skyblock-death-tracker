@@ -121,7 +121,6 @@ void generate_message()
 }
 
 int main() {
-	check_update();
 	//import settings from config file
 	std::ifstream in("config.txt");
 	if (!in) {
