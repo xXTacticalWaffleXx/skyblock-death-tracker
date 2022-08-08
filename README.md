@@ -50,6 +50,8 @@ if building fails because it cant access json/json.h try editing line 24 of hoop
 
 if you build this repo on plain msvc please make a pull request with those instructions
 
+compile.sh and download.sh are scripts that can be used to well, download and compile the code if you dont want to write out the whole compile command every time you update the program and the download script can be used to get the code if you dont want to fuck about with using git or downloading files manually
+
 feel free to contact me on
 
 discord: tactical waffle#1560
