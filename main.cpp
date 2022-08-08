@@ -3,6 +3,8 @@
 
 /*Copyright(C) 2022 luna aphelion
 
+// if editing this code feel free to add your name to the lines above
+
 This program is free software : you can redistribute itand /or modify
 it under the terms of the GNU Affero General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -125,7 +127,7 @@ void generate_message()
 }
 
 int main() {
-	
+	//if editing this program feel free to add your own name and email to this message
 	std::cout << "this program is free software licenced under the gnu AGPL a copy of which can be found at gnu.org/licences" << std::endl
 						<< "copyright Luna Aphelion (luna-aphelion@outlook.com) 2022" << std::endl;
 
