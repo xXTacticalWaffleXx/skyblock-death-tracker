@@ -93,7 +93,7 @@ void generate_message()
 		current_deathcount = std::stoi(current_deathcount_string);
 	}
 	catch (const std::invalid_argument& ia){
-		std::string error_message = "std::invalid_argument detected, shutting down " + admin_id;
+		std::string error_message = "std::invalid_argument detected, shutting down stoi str: " + current_deathcount_string + admin_id;
 		send_message(error_message, true);
 	}
 	std::ifstream data_in("data.txt");
@@ -190,7 +190,7 @@ int main() {
 			pingMin = stoi(settings.at(5));
 			}
 			catch (const std::invalid_argument& ia){
-			std::string error_message = "std::invalid_argument detected, shutting down " + admin_id;
+			std::string error_message = "std::invalid_argument detected, shutting down stoi str: " + settings.at(5) + admin_id;
 			send_message(error_message, true);
 			}
 		}
@@ -208,7 +208,7 @@ int main() {
 		profileNum = stoi(settings.at(7));
 	}
 	catch (const std::invalid_argument& ia){
-		std::string error_message = "std::invalid_argument detected, shutting down " + admin_id;
+		std::string error_message = "std::invalid_argument detected, shutting down stoi str: " + settings.at(7) + admin_id;
 		send_message(error_message, true);
 	}
 
