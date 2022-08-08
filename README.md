@@ -48,8 +48,6 @@ run g++ -02 hoopa deathh bot.cpp discord_webhook.cc -lcurl -lcurlpp -ljsoncpp
 
 if building fails because it cant access json/json.h try editing line 24 of hoopa deathh bot.cpp to say jsoncpp/json/json.h instead of json/json.h
 
-for anyone wondering what the update file is for, its for the update functionality that notifies you if you need to update the program
-
 if you build this repo on plain msvc please make a pull request with those instructions
 
 feel free to contact me on
