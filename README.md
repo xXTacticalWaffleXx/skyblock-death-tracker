@@ -15,7 +15,7 @@ there are more things but those are the most important
 ## usage instruction
 get a binary in its own folder
 
-next to that binary make a config.txt file (an example can be found in the root of this repo)
+next to that binary make a config.txt file (an example can be found in the root of this repo one will also be made if you run the program without a config.txt)
 
 run the binary
 
@@ -40,7 +40,7 @@ find ur exe
 
 ## build instructions on unix
 
-install the libraries needed with your distros package manager
+install the libraries needed with your distros package manager 
 
 in this case libcurl jsoncpp and curlpp
 
