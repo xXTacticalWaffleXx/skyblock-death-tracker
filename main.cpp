@@ -88,7 +88,7 @@ void generate_message()
 	std::string current_deathcount_string = root["profiles"][profileNum]["members"][players_uuid]["stats"]["deaths"].asString();
 	// calculates how many deaths the player has had since there last death and stores an updated death count
 	if (debug) {
-		std::cout << "stoi str: " << current_deathcount_string << std::endl;
+		std::cout << "stoi str: " << current_deathcount_string << std::endl << "success:" << root["success"] << std::endl;
 	}
 	int current_deathcount;
 	try {
