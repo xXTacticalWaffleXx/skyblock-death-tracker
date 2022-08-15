@@ -42,9 +42,11 @@ find ur exe
 
 install the libraries needed with your distros package manager 
 
-in this case libcurl jsoncpp and curlpp
+in this case libcurl jsoncpp and curlpp (these might be called different things depending on your distro)
 
-run g++ -02 hoopa deathh bot.cpp discord_webhook.cc -lcurl -lcurlpp -ljsoncpp
+install g++ with your package manager
+
+download and run download.sh and compile.sh (make sure you run them in a new folder just to make sure you dont over write any files)
 
 if building fails because it cant access json/json.h try editing line 24 of hoopa deathh bot.cpp to say jsoncpp/json/json.h instead of json/json.h
 
