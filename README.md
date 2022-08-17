@@ -17,7 +17,9 @@ get a binary in its own folder
 
 next to that binary make a config.txt file (an example can be found in the root of this repo one will also be made if you run the program without a config.txt)
 
-run the binary
+run the binary with no switches if you want the program to track a players death
+
+run the binary with the -m switch if you want to send a message through the webhook etc to announce downtime or to make a message telling people the bot has started
 
 ## build instructions windows (vs 2019)
 download vs 2019
