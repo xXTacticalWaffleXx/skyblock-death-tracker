@@ -54,6 +54,7 @@ int last_run = 0;
 void send_message(std::string message, bool exit){
 		DiscordWebhook webhook(webhook_url.c_str());
 		webhook.send_message(message.c_str());
+		std::string hacky_workaround = webhook_url; // hackiest work around award for 2022 goes to luna aphelion
 		std::cout << "sent message: " << message << std::endl;
 		if (exit){
 			std::exit(0);
@@ -97,6 +98,9 @@ void generate_message()
 	catch (const std::invalid_argument& ia){
 		std::string error_message = "std::invalid_argument detected, shutting down stoi str: " + current_deathcount_string + admin_id;
 		send_message(error_message, true);
+		std::ofstream os("api_json");
+		os << api_json;
+		std::cout << "line num: 102";
 	}
 	std::ifstream data_in("data.txt");
 	if (!data_in) {
@@ -126,7 +130,9 @@ void generate_message()
 	}
 }
 
-int main() {
+int main(int argc, char** argv) {
+
+
 	//if editing this program feel free to add your own name and email to this message
 	std::cout << "this program is free software licenced under the gnu AGPL a copy of which can be found at gnu.org/licences" << std::endl
 						<< "copyright Luna Aphelion (luna-aphelion@outlook.com) 2022" << std::endl;
@@ -198,6 +204,8 @@ int main() {
 			catch (const std::invalid_argument& ia){
 			std::string error_message = "std::invalid_argument detected, shutting down stoi str: " + settings.at(5) + admin_id;
 			send_message(error_message, true);
+			std::cout << settings.at(5);
+			std::cout << "line num: 206";
 			}
 		}
 		else {
@@ -216,6 +224,8 @@ int main() {
 	catch (const std::invalid_argument& ia){
 		std::string error_message = "std::invalid_argument detected, shutting down stoi str: " + settings.at(7) + admin_id;
 		send_message(error_message, true);
+		std::cout << settings.at(7);
+		std::cout << "line num: 227";
 	}
 
 	admin_id = settings.at(8);
@@ -225,6 +235,17 @@ int main() {
 	if (api_key == "")		{ std::cout << "your config.txt does not have an api key, please put a valid hypixel api key on line 3"; return 0;}
 	if (player_name == "")  { std::cout << "your config.txt does not have a player name, please put the name of the player whos deaths you want to track on line 4"; return 0;}
 	
+	if (argc > 1){
+		std::string arg = argv[1];
+		if (arg == "-m"){
+			std::cout << "what message do you want to send" << std::endl 
+				<< "if you didnt mean to use this option use the ctrl+c interupt" << std::endl;
+			std::string user_message;
+			std::cin >> user_message;
+			send_message(user_message, true);
+		}
+	}
+
 	while (true) {
 		time_t now = time(0);
 		if (now > last_run + run_frequency) {
