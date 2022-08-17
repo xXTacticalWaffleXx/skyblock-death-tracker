@@ -241,7 +241,7 @@ int main(int argc, char** argv) {
 			std::cout << "what message do you want to send" << std::endl 
 				<< "if you didnt mean to use this option use the ctrl+c interupt" << std::endl;
 			std::string user_message;
-			std::cin >> user_message;
+			getline(std::cin, user_message);
 			send_message(user_message, true);
 		}
 	}
