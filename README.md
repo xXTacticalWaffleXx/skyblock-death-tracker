@@ -1,3 +1,5 @@
+this thing is broken now, i cannot be fucked to fix it
+
 # skyblock death tracker
 
 
